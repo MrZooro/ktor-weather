@@ -1,0 +1,23 @@
+version: "1"
+
+services:
+  ktor-weather:
+    restart: on-failure
+    build: ./ktor-weather/
+    container_name: ktor-weather
+    volumes:
+      - ./:/Ktor-weather
+    ports:
+      - 8080:8080
+    env_file:
+      - ./ktor-weather/.env
+  mongo:
+    image: mongo:latest
+    restart: always
+    ports:
+      - 27017:27017
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
